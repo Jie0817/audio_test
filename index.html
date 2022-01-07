@@ -3,13 +3,44 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	<title>Document</title>
+	<script>
+		(function (doc, win) {
+    var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if (clientWidth >= 750) {
+          docEl.style.fontSize = '100px';
+        } else {
+          docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+        }
+      };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+  })(document, window);
+	</script>
 	<style>
-		.audio-style{
-			width: 200px;
-			height: 200px;
+		*{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		ul,li{ padding:0;margin:0;list-style:none}
+		.root{
+			width: 100%;
+			height: 4rem;
 			background: #f0f0f0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.audio-style{
+			width: 4rem;
+			height: 100%;
 			position: relative;
 			overflow: hidden;
 		}
@@ -21,8 +52,8 @@
 			justify-content: center;
 		}
 		.audio_bg,.audio_bg_img{
-			width: 120px;
-			height: 120px;
+			width: 2.8rem;
+			height: 2.8rem;
 		}
 		.audio_bg{
 			position: relative;
@@ -32,20 +63,20 @@
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%,-50%);
-			width: 28px;
-			height: 28px;
+			width: 0.48rem;
+			height: 0.48rem;
 		}
 		.audio_pointer{
-			width: 90px;
+			width: 1.6rem;
 			position: absolute;
-			top: -30px;
-			right: 10px;
+			top: -0.5rem;
+			right: 0.1rem;
 		}
 		.play .audio_bg_img{
 			animation: spin 2s linear infinite;
 		}
 		.audio_pointer{
-			transform:rotate(-50deg);
+			transform:rotate(-70deg);
 		}
 		.play .audio_pointer{
 			transform:rotate(0deg);
@@ -61,49 +92,83 @@
 		.audio_pointer>img{
 			width: 100%;
 		}
-		
+
+
+		.audio-switch{
+			width: 4rem;
+			height: 100%;
+		}
+		.audio-switch>p{
+			width: 100%;
+			background: #8361bb;
+			color: #fff;
+			font-weight: bold;
+			padding: 0.10rem 0.18rem;
+			font-size: 0.24rem;
+		}
+		.list{
+			font-size: 0.18rem;
+			margin-top: 0.24rem;
+			color: #999;
+		}
+		.list>li{
+			padding: 0.04rem;
+		}
+		.list>.active{
+			font-size: 0.2rem;
+			font-weight: bold;
+			color: #8361bb;
+		}
 	</style>
 </head>
 <body>
-	<audio id="audio" src="./长语音流样音/德语长语音流/女德语长语音流.wav"></audio>
-	<div class="audio-style" id="audioStatus">
-		<div class="audio-container">
-			<div class="audio_bg">
-				<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
-				<img class="icon" id="playbackStatus" src="./img/play.png" alt="">
+	<audio id="audio" src="./长语音流样音/德语长语音流/男德语长语音流.wav"></audio>
+	<div class="root">
+		<div class="audio-style" id="audioStatus">
+			<div class="audio-container">
+				<div class="audio_bg">
+					<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
+					<img class="icon" id="playbackStatus" src="./img/play.png" alt="">
+				</div>
+			</div>
+			
+			<div class="audio_pointer">
+				<img src="./img/audio_pointer.png" alt="">
 			</div>
 		</div>
-		
-		<div class="audio_pointer">
-			<img src="./img/audio_pointer.png" alt="">
+		<div class="audio-switch">
+			<p>多语种ASR语言数据集</p>
+			<ul id="text" class="list">
+				<li class="active" audioSrc='./长语音流样音/德语长语音流/男德语长语音流.wav'>德语长语音流</li>
+				<li audioSrc='./长语音流样音/意大利语长语音流/男.wav'>意大利语长语言流数据集</li>
+				<li audioSrc='./长语音流样音/葡语长语音流/男.wav'>葡语长语音流</li>
+				<li audioSrc='./长语音流样音/西班牙语长语音流/男.wav'>西班牙语长语音流</li>
+				<li audioSrc='./长语音流样音/西班牙语自由对话/T300678G10001S0002.wav'>西班牙语自由对话</li>
+			</ul>
 		</div>
+		
 	</div>
-	<ul id="text">
-		<li audioSrc='./长语音流样音/德语长语音流/女德语长语音流.wav'>录音一</li>
-		<li audioSrc='./长语音流样音/德语长语音流/男德语长语音流.wav'>录音二</li>
-		<li audioSrc='./长语音流样音/意大利语长语音流/女.wav'>录音三</li>
-		<li audioSrc='./长语音流样音/意大利语长语音流/男.wav'>录音四</li>
-		<li audioSrc='./长语音流样音/葡语长语音流/男.wav'>录音五</li>
-	</ul>
+	
 	<script>
 		/**
 		 * 1 播放中
 		 * 2 暂停中
 		*/
 		let status = 2
-		const audio = document.getElementById('audio')
-		const textArr = [...document.getElementById('text').children]
+		const audio = document.getElementById('audio') //音频
+		const textArr = [...document.getElementById('text').children] // 音频列表
 		const audioStatus = document.getElementById('audioStatus')
 		const playbackStatus = document.getElementById('playbackStatus')
+
+		// 暂停 or 播放
 		playbackStatus.onclick = function(){
-			if(status == 1){
-				console.log(status);
+			if(status == 1){ // 如果是播放中
 				audio.pause();
 				status = 2
+				// 删除动画
 				audioStatus.classList.remove("play");
 				playbackStatus.setAttribute('src','./img/play.png')
-			}else{
-				console.log(status);
+			}else{ // 暂停中
 				audio.play();
 				status = 1
 				audioStatus.classList.add("play");
@@ -111,8 +176,8 @@
 			}
 		}
 		
+		// 监听音频是否播放完成
 		audio.addEventListener('ended',function(){
-		
 			audio.pause();
 			status = 2
 			audioStatus.classList.remove("play");
@@ -121,10 +186,21 @@
 		textArr.forEach((item,index) => {
 			item.onclick = function(){
 				var audioLoad = new Audio(item.getAttribute("audioSrc"));
-				loading();
+				// loading();
+				audio.pause();
+				/**
+				 * 删除其他active类名
+				 * 
+				*/
+				textArr.forEach((item,index) => {
+					item.classList.remove("active");
+				})
+				// 添加选中类名
+				item.classList.add("active");
+
+				// 音频加载完成后执行播放
 				audioLoad.onloadedmetadata = function(){
-					clear()
-					audio.pause();
+					// clear()
 					audio.setAttribute('src',item.getAttribute("audioSrc"))
 					audio.play();
 					status = 1
@@ -134,6 +210,9 @@
 				
 			}
 		})
+
+
+		// 加载中
 		window.onload = function () {
 				var loadCss = document.createElement("style");
 				loadCss.type = "text/css";
