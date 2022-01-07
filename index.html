@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<audio id="audio" controls src="./长语音流样音/德语长语音流/女德语长语音流.wav"></audio>
+	<ul id="text">
+		<li audioSrc='./长语音流样音/德语长语音流/女德语长语音流.wav'>录音一</li>
+		<li audioSrc='./长语音流样音/德语长语音流/男德语长语音流.wav'>录音二</li>
+		<li audioSrc='./长语音流样音/意大利语长语音流/女.wav'>录音三</li>
+		<li audioSrc='./长语音流样音/意大利语长语音流/男.wav'>录音四</li>
+		<li audioSrc='./长语音流样音/葡语长语音流/男.wav'>录音五</li>
+	</ul>
+	<script>
+		const audio = document.getElementById('audio')
+		const textArr = [...document.getElementById('text').children]
+		textArr.forEach((item,index) => {
+			item.onclick = function(){
+				audio.pause();
+				audio.setAttribute('src',item.getAttribute("audioSrc"))
+				audio.play();
+			}
+		})
+	</script>
+</body>
+</html>
