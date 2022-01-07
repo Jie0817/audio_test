@@ -5,9 +5,80 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<style>
+
+		.audio-style{
+			width: 200px;
+			height: 200px;
+			background: #f0f0f0;
+			position: relative;
+			overflow: hidden;
+		}
+		.audio-container{
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.audio_bg,.audio_bg_img{
+			width: 120px;
+			height: 120px;
+		}
+		.audio_bg{
+			position: relative;
+		}
+		.audio_bg>.icon{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 28px;
+			height: 28px;
+		}
+		.audio_pointer{
+			width: 90px;
+			position: absolute;
+			top: -30px;
+			right: 10px;
+		}
+		.play .audio_bg_img{
+			animation: spin 2s linear infinite;
+		}
+		.audio_pointer{
+			transform:rotate(-50deg);
+		}
+		.play .audio_pointer{
+			transform:rotate(0deg);
+		}
+		@keyframes spin {
+				from {
+						transform: rotate(0deg);
+				}
+				to {
+						transform: rotate(360deg);
+				}
+		}
+		.audio_pointer>img{
+			width: 100%;
+		}
+		
+	</style>
 </head>
 <body>
-	<audio id="audio" controls src="./长语音流样音/德语长语音流/女德语长语音流.wav"></audio>
+	<audio id="audio" src="./长语音流样音/德语长语音流/女德语长语音流.wav"></audio>
+	<div class="audio-style" id="audioStatus">
+		<div class="audio-container">
+			<div class="audio_bg">
+				<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
+				<img class="icon" id="playbackStatus" src="./img/play.png" alt="">
+			</div>
+		</div>
+		
+		<div class="audio_pointer">
+			<img src="./img/audio_pointer.png" alt="">
+		</div>
+	</div>
 	<ul id="text">
 		<li audioSrc='./长语音流样音/德语长语音流/女德语长语音流.wav'>录音一</li>
 		<li audioSrc='./长语音流样音/德语长语音流/男德语长语音流.wav'>录音二</li>
@@ -16,13 +87,50 @@
 		<li audioSrc='./长语音流样音/葡语长语音流/男.wav'>录音五</li>
 	</ul>
 	<script>
+		/**
+		 * 1 播放中
+		 * 2 暂停中
+		*/
+		let status = 2
 		const audio = document.getElementById('audio')
 		const textArr = [...document.getElementById('text').children]
+		const audioStatus = document.getElementById('audioStatus')
+		const playbackStatus = document.getElementById('playbackStatus')
+		playbackStatus.onclick = function(){
+			if(status == 1){
+				console.log(status);
+				audio.pause();
+				status = 2
+				audioStatus.classList.remove("play");
+				playbackStatus.setAttribute('src','./img/play.png')
+			}else{
+				console.log(status);
+				audio.play();
+				status = 1
+				audioStatus.classList.add("play");
+				playbackStatus.setAttribute('src','./img/suspend.png')
+			}
+		}
+		
+		audio.addEventListener('ended',function(){
+		
+			audio.pause();
+			status = 2
+			audioStatus.classList.remove("play");
+			playbackStatus.setAttribute('src','./img/play.png')
+		})
 		textArr.forEach((item,index) => {
 			item.onclick = function(){
-				audio.pause();
-				audio.setAttribute('src',item.getAttribute("audioSrc"))
-				audio.play();
+				var audioLoad = new Audio(item.getAttribute("audioSrc"));
+				audioLoad.onloadedmetadata = function(){
+					audio.pause();
+					audio.setAttribute('src',item.getAttribute("audioSrc"))
+					audio.play();
+					status = 1
+					audioStatus.classList.add("play");
+					playbackStatus.setAttribute('src','./img/suspend.png')
+				}
+				
 			}
 		})
 	</script>
