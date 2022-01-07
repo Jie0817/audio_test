@@ -31,15 +31,16 @@
 		}
 		ul,li{ padding:0;margin:0;list-style:none}
 		.root{
-			width: 1200px;
+			width: 12rem;
 			height: 5rem;
 			background: #fbfaff;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			margin: auto;
 		}
 		.audio-style{
-			width: 4rem;
+			width: 12rem;
 			height: 100%;
 			position: relative;
 			overflow: hidden;
@@ -123,7 +124,7 @@
 </head>
 <body>
 	<audio id="audio" src="./长语音流样音/德语长语音流/男德语长语音流.wav"></audio>
-	<div class="root">
+	<div class="root" audio="root">
 		<div class="audio-style" id="audioStatus">
 			<div class="audio-container">
 				<div class="audio_bg">
@@ -155,84 +156,63 @@
 		 * 2 暂停中
 		*/
 		let status = 2
+		const audioarr = [...document.querySelector("div[audio=root]")]
 		const audio = document.getElementById('audio') //音频
 		const textArr = [...document.getElementById('text').children] // 音频列表
 		const audioStatus = document.getElementById('audioStatus')
 		const playbackStatus = document.getElementById('playbackStatus')
 
-		// 暂停 or 播放
-		playbackStatus.onclick = function(){
-			if(status == 1){ // 如果是播放中
-				audio.pause();
-				status = 2
-				// 删除动画
-				audioStatus.classList.remove("play");
-				playbackStatus.setAttribute('src','./img/play.png')
-			}else{ // 暂停中
-				audio.play();
-				status = 1
-				audioStatus.classList.add("play");
-				playbackStatus.setAttribute('src','./img/suspend.png')
-			}
-		}
-		
-		// 监听音频是否播放完成
-		audio.addEventListener('ended',function(){
-			audio.pause();
-			status = 2
-			audioStatus.classList.remove("play");
-			playbackStatus.setAttribute('src','./img/play.png')
-		})
-		textArr.forEach((item,index) => {
-			item.onclick = function(){
-				var audioLoad = new Audio(item.getAttribute("audioSrc"));
-				// loading();
-				audio.pause();
-				/**
-				 * 删除其他active类名
-				 * 
-				*/
-				textArr.forEach((item,index) => {
-					item.classList.remove("active");
-				})
-				// 添加选中类名
-				item.classList.add("active");
 
-				// 音频加载完成后执行播放
-				audioLoad.onloadedmetadata = function(){
-					// clear()
-					audio.setAttribute('src',item.getAttribute("audioSrc"))
+		audioarr.forEach((item,index) => {
+			// 暂停 or 播放
+			playbackStatus.onclick = function(){
+				if(status == 1){ // 如果是播放中
+					audio.pause();
+					status = 2
+					// 删除动画
+					audioStatus.classList.remove("play");
+					playbackStatus.setAttribute('src','./img/play.png')
+				}else{ // 暂停中
 					audio.play();
 					status = 1
 					audioStatus.classList.add("play");
 					playbackStatus.setAttribute('src','./img/suspend.png')
 				}
-				
 			}
+			
+			// 监听音频是否播放完成
+			audio.addEventListener('ended',function(){
+				audio.pause();
+				status = 2
+				audioStatus.classList.remove("play");
+				playbackStatus.setAttribute('src','./img/play.png')
+			})
+			textArr.forEach((item,index) => {
+				item.onclick = function(){
+					var audioLoad = new Audio(item.getAttribute("audioSrc"));
+					audio.pause();
+					/**
+					 * 删除其他active类名
+					 * 
+					*/
+					textArr.forEach((item,index) => {
+						item.classList.remove("active");
+					})
+					// 添加选中类名
+					item.classList.add("active");
+
+					// 音频加载完成后执行播放
+					audioLoad.onloadedmetadata = function(){
+						audio.setAttribute('src',item.getAttribute("audioSrc"))
+						audio.play();
+						status = 1
+						audioStatus.classList.add("play");
+						playbackStatus.setAttribute('src','./img/suspend.png')
+					}
+					
+				}
+			})
 		})
-
-
-		// 加载中
-		window.onload = function () {
-				var loadCss = document.createElement("style");
-				loadCss.type = "text/css";
-				loadCss.innerHTML = "@keyframes loop { 0%{transform: rotate(0deg);} 100%{ transform: rotate(360deg);}";
-				document.head.appendChild(loadCss);
-
-				var p = document.createElement("p");
-				p.id = "loading";
-				var pic = document.createElement("picture");
-				p.style.cssText = "display: none;width: 100px;height: 100px;background: rgba(255, 255, 255,0);position: fixed;top: 50%;left: 50%;z-index: 999999;";
-				pic.style.cssText = "display: block;width: 50px;height: 50px;border-radius: 50%;box-shadow: 0 2px 0 #666; animation: loop 1s infinite;-webkit-animation: loop 1s infinite;";
-				p.appendChild(pic);
-				document.body.appendChild(p);
-		}
-		const loading = function(){
-				document.getElementById("loading").style.display = 'block';
-		}
-		const clear = function(){
-			document.getElementById("loading").style.display = 'none';
-		}
 	</script>
 </body>
 </html>
