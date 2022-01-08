@@ -268,13 +268,13 @@
 					item.classList.add("active");
 
 					// 音频加载完成后执行播放
-					audioLoad.onloadedmetadata = function(){
+					// audioLoad.onloadedmetadata = function(){
 						audio[index].setAttribute('src',item.getAttribute("audioSrc"))
 						audio[index].play();
 						status[index] = 1
 						audioStatus[index].classList.add("play");
 						playbackStatus[index].setAttribute('src','./img/suspend.png')
-					}
+					// }
 					
 				}
 			})
