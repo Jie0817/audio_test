@@ -123,13 +123,13 @@
 	</style>
 </head>
 <body>
-	<audio id="audio" src="./长语音流样音/德语长语音流/男德语长语音流.wav"></audio>
+	<audio audio="audio" src="./audio/1/德语长语音流.wav"></audio>
 	<div class="root" audio="root">
-		<div class="audio-style" id="audioStatus">
+		<div class="audio-style" audio="audioStatus">
 			<div class="audio-container">
 				<div class="audio_bg">
 					<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
-					<img class="icon" id="playbackStatus" src="./img/play.png" alt="">
+					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
 				</div>
 			</div>
 			
@@ -138,13 +138,72 @@
 			</div>
 		</div>
 		<div class="audio-switch">
-			<p>多语种ASR语言数据集</p>
-			<ul id="text" class="list">
-				<li class="active" audioSrc='./长语音流样音/德语长语音流/男德语长语音流.wav'>德语长语音流</li>
-				<li audioSrc='./长语音流样音/意大利语长语音流/男.wav'>意大利语长语言流数据集</li>
-				<li audioSrc='./长语音流样音/葡语长语音流/男.wav'>葡语长语音流</li>
-				<li audioSrc='./长语音流样音/西班牙语长语音流/男.wav'>西班牙语长语音流</li>
-				<li audioSrc='./长语音流样音/西班牙语自由对话/T300678G10001S0002.wav'>西班牙语自由对话</li>
+			<p>多语种ASR语音数据集</p>
+			<ul audio="text" class="list">
+				<li class="active" audioSrc='./audio/1/德语长语音流.wav'>德语长语音流</li>
+				<li audioSrc='./audio/1/意大利语长语音流.wav'>意大利语长语音流</li>
+				<li audioSrc='./audio/1/葡语长语音流.wav'>葡语长语音流</li>
+				<li audioSrc='./audio/1/波兰语高保真语音.wav'>波兰语高保真语音</li>
+				<li audioSrc='./audio/1/丹麦语高保真语音.wav'>丹麦语高保真语音</li>
+				<li audioSrc='./audio/1/芬兰语高保真语音.wav'>芬兰语高保真语音</li>
+				<li audioSrc='./audio/1/挪威语高保真语音.wav'>挪威语高保真语音</li>
+				<li audioSrc='./audio/1/瑞典语高保真语音.wav'>瑞典语高保真语音</li>
+				<li audioSrc='./audio/1/西班牙语长语音流.wav'>西班牙语长语音流</li>
+				<li audioSrc='./audio/1/西班牙语自由对话.wav'>西班牙语自由对话</li>
+			</ul>
+		</div>
+		
+	</div>
+	<audio audio="audio" src="./audio/2/川式普通话长语音流.wav"></audio>
+	<div class="root" audio="root">
+		<div class="audio-style" audio="audioStatus">
+			<div class="audio-container">
+				<div class="audio_bg">
+					<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
+					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
+				</div>
+			</div>
+			
+			<div class="audio_pointer">
+				<img src="./img/audio_pointer.png" alt="">
+			</div>
+		</div>
+		<div class="audio-switch">
+			<p>方言ASR语音数据集</p>
+			<ul audio="text" class="list">
+				<li class="active" audioSrc='./audio/2/川式普通话长语音流.wav'>川式普通话长语音流</li>
+				<li audioSrc='./audio/2/口音粤语长语音流.wav'>口音粤语长语音流</li>
+				<li audioSrc='./audio/2/苏州话长语音流.wav'>苏州话长语音流</li>
+				<li audioSrc='./audio/2/天津话长语音流.wav'>天津话长语音流</li>
+				<li audioSrc='./audio/2/长沙话自由对话语音流.wav'>长沙话自由对话语音流</li>
+			</ul>
+		</div>
+		
+	</div>
+	<audio audio="audio" src="./audio/3/川式普通话长语音流.wav"></audio>
+	<div class="root" audio="root">
+		<div class="audio-style" audio="audioStatus">
+			<div class="audio-container">
+				<div class="audio_bg">
+					<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
+					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
+				</div>
+			</div>
+			
+			<div class="audio_pointer">
+				<img src="./img/audio_pointer.png" alt="">
+			</div>
+		</div>
+		<div class="audio-switch">
+			<p>方言ASR数据语音数据集</p>
+			<ul audio="text" class="list">
+				<li class="active" audioSrc='./audio/3/川式普通话长语音流.wav'>川式普通话长语音流</li>
+				<li audioSrc='./audio/3/口音粤语长语音流.wav'>口音粤语长语音流</li>
+				<li audioSrc='./audio/3/蒙语长语音流.wav'>蒙语长语音流</li>
+				<li audioSrc='./audio/3/青岛话长语音流.wav'>青岛话长语音流</li>
+				<li audioSrc='./audio/3/苏州话长语音流.wav'>苏州话长语音流</li>
+				<li audioSrc='./audio/3/天津话长语音流.wav'>天津话长语音流</li>
+				<li audioSrc='./audio/3/长沙话自由对话语音流.wav'>长沙话自由对话语音流</li>
 			</ul>
 		</div>
 		
@@ -155,64 +214,92 @@
 		 * 1 播放中
 		 * 2 暂停中
 		*/
-		let status = 2
-		const audioarr = [...document.querySelector("div[audio=root]")]
-		const audio = document.getElementById('audio') //音频
-		const textArr = [...document.getElementById('text').children] // 音频列表
-		const audioStatus = document.getElementById('audioStatus')
-		const playbackStatus = document.getElementById('playbackStatus')
-
-
+		let status = []
+		// let flag = 0 //判断是哪个模块
+		const audio = [...document.querySelectorAll("audio[audio=audio]")] //音频
+		const audioarr = [...document.querySelectorAll("div[audio=root]")]
+		const textArr = [...document.querySelectorAll("ul[audio=text]")] // 音频列表
+		const audioStatus = [...document.querySelectorAll("div[audio=audioStatus]")]
+		const playbackStatus = [...document.querySelectorAll("img[audio=playbackStatus]")]
 		audioarr.forEach((item,index) => {
+			status.push(2)
+		})
+
+		audioarr.forEach((ditem,index) => {
+			// 监听音频是否播放完成
+			audio[index].addEventListener('ended',function(){
+				audio[index].pause();
+				status[index] = 2
+				audioStatus[index].classList.remove("play");
+				playbackStatus[index].setAttribute('src','./img/play.png')
+			})
 			// 暂停 or 播放
-			playbackStatus.onclick = function(){
-				if(status == 1){ // 如果是播放中
-					audio.pause();
-					status = 2
-					// 删除动画
-					audioStatus.classList.remove("play");
-					playbackStatus.setAttribute('src','./img/play.png')
+			playbackStatus[index].onclick = function(){
+				if(status[index] == 1){ // 如果是播放中
+					audio[index].pause();
+					// 清除动画
+					status[index] = 2
+					playbackStatus[index].setAttribute('src','./img/play.png')
+					audioStatus[index].classList.remove("play");
 				}else{ // 暂停中
-					audio.play();
-					status = 1
-					audioStatus.classList.add("play");
-					playbackStatus.setAttribute('src','./img/suspend.png')
+					removePlaystatus(index)
+					audio[index].play();
+					status[index] = 1
+					audioStatus[index].classList.add("play");
+					playbackStatus[index].setAttribute('src','./img/suspend.png')
 				}
 			}
-			
-			// 监听音频是否播放完成
-			audio.addEventListener('ended',function(){
-				audio.pause();
-				status = 2
-				audioStatus.classList.remove("play");
-				playbackStatus.setAttribute('src','./img/play.png')
-			})
-			textArr.forEach((item,index) => {
+			let textArrChildren = [...textArr[index].children]
+			textArrChildren.forEach(item => {
 				item.onclick = function(){
+					// flag = index   //保存当前在播放模块
 					var audioLoad = new Audio(item.getAttribute("audioSrc"));
-					audio.pause();
+					audio[index].pause();
 					/**
 					 * 删除其他active类名
 					 * 
 					*/
-					textArr.forEach((item,index) => {
-						item.classList.remove("active");
+					textArrChildren.forEach(t => {
+						t.classList.remove("active");
 					})
+					// 清除动画
+					removePlaystatus(index)
 					// 添加选中类名
 					item.classList.add("active");
 
 					// 音频加载完成后执行播放
 					audioLoad.onloadedmetadata = function(){
-						audio.setAttribute('src',item.getAttribute("audioSrc"))
-						audio.play();
-						status = 1
-						audioStatus.classList.add("play");
-						playbackStatus.setAttribute('src','./img/suspend.png')
+						audio[index].setAttribute('src',item.getAttribute("audioSrc"))
+						audio[index].play();
+						status[index] = 1
+						audioStatus[index].classList.add("play");
+						playbackStatus[index].setAttribute('src','./img/suspend.png')
 					}
 					
 				}
 			})
 		})
+		// 移除动画
+		const removePlaystatus = function(index){
+			playbackStatus.forEach((t,i) => {
+				if(index != i){
+					status[i] = 2
+					t.setAttribute('src','./img/play.png')
+				}
+			})
+			audioStatus.forEach((t,i) => {
+				if(index != i){
+					// 删除动画
+					t.classList.remove("play");
+				}
+			})
+			// 停止其他音频
+			audio.forEach((t,i) => {
+				if(index != i){
+					t.pause();
+				}
+			})
+		}
 	</script>
 </body>
 </html>
