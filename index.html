@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,102 +8,125 @@
 	<title>Document</title>
 	<script>
 		(function (doc, win) {
-    var docEl = doc.documentElement,
-      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-      recalc = function () {
-        var clientWidth = docEl.clientWidth;
-        if (!clientWidth) return;
-        if (clientWidth >= 750) {
-          docEl.style.fontSize = '100px';
-        } else {
-          docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-        }
-      };
-    if (!doc.addEventListener) return;
-    win.addEventListener(resizeEvt, recalc, false);
-    doc.addEventListener('DOMContentLoaded', recalc, false);
-  })(document, window);
+			var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function () {
+					var clientWidth = docEl.clientWidth;
+					if (!clientWidth) return;
+					if (clientWidth >= 750) {
+						docEl.style.fontSize = '100px';
+					} else {
+						docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+					}
+				};
+			if (!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
 	</script>
 	<style>
-		*{
+		* {
 			padding: 0;
 			margin: 0;
 			box-sizing: border-box;
 		}
-		ul,li{ padding:0;margin:0;list-style:none}
-		.root{
+
+		ul,
+		li {
+			padding: 0;
+			margin: 0;
+			list-style: none
+		}
+
+		.root {
 			width: 100%;
+			padding: 0 0.24rem;
 			height: 5rem;
 			background: #fbfaff;
 			display: flex;
 			align-items: center;
-			justify-content: space-between;
+			justify-content: center;
 			margin: auto;
-			margin-bottom: 0.12rem;
+			margin-bottom: 0.6rem;
 		}
-		.audio-style{
+
+		.audio-style {
 			width: 45%;
 			height: 100%;
 			position: relative;
 			overflow: hidden;
+			margin-right: 1.5rem;
 		}
-		.audio-container{
+
+		.audio-container {
 			width: 100%;
 			height: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
-		.audio_bg,.audio_bg_img{
+
+		.audio_bg,
+		.audio_bg_img {
 			width: 3.4rem;
 			height: 3.4rem;
 		}
-		.audio_bg{
+
+		.audio_bg {
 			position: relative;
 		}
-		.audio_bg>.icon{
+
+		.audio_bg>.icon {
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%,-50%);
+			transform: translate(-50%, -50%);
 			width: 0.72rem;
 			height: 0.72rem;
 		}
-		.audio_pointer{
+
+		.audio_pointer {
 			width: 2.4rem;
 			position: absolute;
 			top: -0.8rem;
 			right: 0.2rem;
 		}
-		.play .audio_bg_img{
+
+		.play .audio_bg_img {
 			animation: spin 2s linear infinite;
 		}
-		.audio_pointer{
-			transform:rotate(-40deg);
+
+		.audio_pointer {
+			transform: rotate(-40deg);
 			transition: all .5s;
 			transform-origin: right top;
 		}
-		.play .audio_pointer{
-			transform:rotate(0deg);
+
+		.play .audio_pointer {
+			transform: rotate(0deg);
 		}
+
 		@keyframes spin {
-				from {
-						transform: rotate(0deg);
-				}
-				to {
-						transform: rotate(360deg);
-				}
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
 		}
-		.audio_pointer>img{
+
+		.audio_pointer>img {
 			width: 100%;
 		}
 
 
-		.audio-switch{
+		.audio-switch {
 			width: 30%;
 			height: 100%;
 		}
-		.audio-switch>p{
+
+		.audio-switch>p {
 			width: 100%;
 			background: #8361bb;
 			color: #fff;
@@ -110,21 +134,25 @@
 			padding: 0.10rem 0.18rem;
 			font-size: 0.24rem;
 		}
-		.list{
+
+		.list {
 			font-size: 0.20rem;
 			margin-top: 0.24rem;
 			color: #999;
 		}
-		.list>li{
+
+		.list>li {
 			padding: 0.04rem 0 0.04rem 0.28rem;
 		}
-		.list>.active{
+
+		.list>.active {
 			font-size: 0.24rem;
 			font-weight: bold;
 			color: #8361bb;
 		}
 	</style>
 </head>
+
 <body>
 	<audio audio="audio" src="./audio/1/德语长语音流.wav"></audio>
 	<div class="root" audio="root">
@@ -135,7 +163,7 @@
 					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
 				</div>
 			</div>
-			
+
 			<div class="audio_pointer">
 				<img src="./img/audio_pointer.png" alt="">
 			</div>
@@ -155,7 +183,7 @@
 				<li audioSrc='./audio/1/西班牙语自由对话.wav'>西班牙语自由对话</li>
 			</ul>
 		</div>
-		
+
 	</div>
 	<audio audio="audio" src="./audio/2/川式普通话长语音流.wav"></audio>
 	<div class="root" audio="root">
@@ -166,7 +194,7 @@
 					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
 				</div>
 			</div>
-			
+
 			<div class="audio_pointer">
 				<img src="./img/audio_pointer.png" alt="">
 			</div>
@@ -181,7 +209,7 @@
 				<li audioSrc='./audio/2/长沙话自由对话语音流.wav'>长沙话自由对话语音流</li>
 			</ul>
 		</div>
-		
+
 	</div>
 	<audio audio="audio" src="./audio/3/川式普通话长语音流.wav"></audio>
 	<div class="root" audio="root">
@@ -192,7 +220,7 @@
 					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
 				</div>
 			</div>
-			
+
 			<div class="audio_pointer">
 				<img src="./img/audio_pointer.png" alt="">
 			</div>
@@ -209,9 +237,9 @@
 				<li audioSrc='./audio/3/长沙话自由对话语音流.wav'>长沙话自由对话语音流</li>
 			</ul>
 		</div>
-		
+
 	</div>
-	
+
 	<script>
 		/**
 		 * 1 播放中
@@ -224,37 +252,37 @@
 		const textArr = [...document.querySelectorAll("ul[audio=text]")] // 音频列表
 		const audioStatus = [...document.querySelectorAll("div[audio=audioStatus]")]
 		const playbackStatus = [...document.querySelectorAll("img[audio=playbackStatus]")]
-		audioarr.forEach((item,index) => {
+		audioarr.forEach((item, index) => {
 			status.push(2)
 		})
 
-		audioarr.forEach((ditem,index) => {
+		audioarr.forEach((ditem, index) => {
 			// 监听音频是否播放完成
-			audio[index].addEventListener('ended',function(){
+			audio[index].addEventListener('ended', function () {
 				audio[index].pause();
 				status[index] = 2
 				audioStatus[index].classList.remove("play");
-				playbackStatus[index].setAttribute('src','./img/play.png')
+				playbackStatus[index].setAttribute('src', './img/play.png')
 			})
 			// 暂停 or 播放
-			playbackStatus[index].onclick = function(){
-				if(status[index] == 1){ // 如果是播放中
+			playbackStatus[index].onclick = function () {
+				if (status[index] == 1) { // 如果是播放中
 					audio[index].pause();
 					// 清除动画
 					status[index] = 2
-					playbackStatus[index].setAttribute('src','./img/play.png')
+					playbackStatus[index].setAttribute('src', './img/play.png')
 					audioStatus[index].classList.remove("play");
-				}else{ // 暂停中
+				} else { // 暂停中
 					removePlaystatus(index)
 					audio[index].play();
 					status[index] = 1
 					audioStatus[index].classList.add("play");
-					playbackStatus[index].setAttribute('src','./img/suspend.png')
+					playbackStatus[index].setAttribute('src', './img/suspend.png')
 				}
 			}
 			let textArrChildren = [...textArr[index].children]
 			textArrChildren.forEach(item => {
-				item.onclick = function(){
+				item.onclick = function () {
 					// flag = index   //保存当前在播放模块
 					var audioLoad = new Audio(item.getAttribute("audioSrc"));
 					audio[index].pause();
@@ -272,37 +300,38 @@
 
 					// 音频加载完成后执行播放
 					// audioLoad.onloadedmetadata = function(){
-						audio[index].setAttribute('src',item.getAttribute("audioSrc"))
-						audio[index].play();
-						status[index] = 1
-						audioStatus[index].classList.add("play");
-						playbackStatus[index].setAttribute('src','./img/suspend.png')
+					audio[index].setAttribute('src', item.getAttribute("audioSrc"))
+					audio[index].play();
+					status[index] = 1
+					audioStatus[index].classList.add("play");
+					playbackStatus[index].setAttribute('src', './img/suspend.png')
 					// }
-					
+
 				}
 			})
 		})
 		// 移除动画
-		const removePlaystatus = function(index){
-			playbackStatus.forEach((t,i) => {
-				if(index != i){
+		const removePlaystatus = function (index) {
+			playbackStatus.forEach((t, i) => {
+				if (index != i) {
 					status[i] = 2
-					t.setAttribute('src','./img/play.png')
+					t.setAttribute('src', './img/play.png')
 				}
 			})
-			audioStatus.forEach((t,i) => {
-				if(index != i){
+			audioStatus.forEach((t, i) => {
+				if (index != i) {
 					// 删除动画
 					t.classList.remove("play");
 				}
 			})
 			// 停止其他音频
-			audio.forEach((t,i) => {
-				if(index != i){
+			audio.forEach((t, i) => {
+				if (index != i) {
 					t.pause();
 				}
 			})
 		}
 	</script>
 </body>
+
 </html>
