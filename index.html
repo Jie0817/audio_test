@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	<title>Document</title>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>
 		(function (doc, win) {
 			var docEl = doc.documentElement,
@@ -40,30 +41,33 @@
 
 		.root {
 			width: 100%;
-			/* padding: 0 0.24rem; */
-			height: 5rem;
-			background: #fbfaff;
+			padding: 0;
+			/* height: 5rem; */
+			background: #fff;
 			display: flex;
-			align-items: center;
+			/* align-items: center; */
 			justify-content: space-between;
 			margin: auto;
 			margin-bottom: 0.6rem;
+			margin-top: 1rem;
 		}
 
 		.audio-style {
 			width: 50%;
 			height: 100%;
+			padding-left: 0.5rem;
 			position: relative;
 			overflow: hidden;
-			/* margin-right: 1.5rem; */
 		}
 
 		.audio-container {
 			width: 100%;
 			height: 100%;
+			padding: 0.64rem 0;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			position: relative;
 		}
 
 		.audio_bg,
@@ -86,24 +90,20 @@
 		}
 
 		.audio_pointer {
-			width: 2.6rem;
+			width: 2.3rem;
 			position: absolute;
-			top: -0.9rem;
-			right: 0.5rem;
-		}
-
-		.play .audio_bg_img {
-			animation: spin 2s linear infinite;
-		}
-
-		.audio_pointer {
+			top: -1.5rem;
+			right: -0.6rem;
 			transform: rotate(-40deg);
 			transition: all .5s;
 			transform-origin: right top;
 		}
-
 		.play .audio_pointer {
 			transform: rotate(0deg);
+		}
+
+		.play .audio_bg_img {
+			animation: spin 2s linear infinite;
 		}
 
 		@keyframes spin {
@@ -134,41 +134,178 @@
 			padding: 0.10rem 0.18rem;
 			font-size: 0.24rem;
 		}
+		.root>.content {
+			width: 40%;
+			/* margin-left: 1rem; */
+			padding-top: 0.48rem;
+		}
 
-		.list {
+		/* 下拉 */
+		.Collapse {
+			width: 100%;
+			margin-bottom: 0.24rem;
+			/* border-bottom: 1px solid #e6e6e6; */
+		}
+
+		.Collapse .glyphicon-chevron-down {
+			width: 0.16rem;
+			height: 0.16rem;
+			transform-origin: center center;
+			transition: transform 0.5s;
+			margin-right: 0.12rem;
+			-moz-transition: -moz-transform 0.2s;
+
+			-moz-transition: -moz-transform 0.2s;
+
+			-o-transition: -o-transform 0.2s;
+
+			-ms-transition: -ms-transform 0.2s;
+		}
+
+		.Collapse-title {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			background-color: #F8F8F8;
+			padding: 0.12rem;
+			font-size: 0.24rem;
+			margin: 0;
+		}
+
+		.Collapse-item {
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			max-height: 0px;
+			transition: all .5s ease-out;
+			overflow: hidden;
 			font-size: 0.20rem;
-			margin-top: 0.24rem;
 			color: #999;
 		}
 
-		.list>li {
-			padding: 0.04rem 0 0.04rem 0.28rem;
+		.Collapse-item>li {
+			padding: 0.08rem 0 0.04rem 0.28rem;
 		}
 
-		.list>.active {
+		.Collapse-item>.active {
 			font-size: 0.24rem;
 			font-weight: bold;
 			color: #8361bb;
+		}
+
+		.contact {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			font-size: 14px;
+			margin-bottom: 24px;
+			padding: 0 32px;
+		}
+
+		.contact>p {
+			text-align: center;
 		}
 	</style>
 </head>
 
 <body>
-	<audio audio="audio" src="./audio/1/德语长语音流.wav"></audio>
+	<audio audio="audio" id="audio" src="./audio/1/德语长语音流.wav"></audio>
 	<div class="root" audio="root">
-		<div class="audio-style" audio="audioStatus">
+		<div class="audio-style" audio="audioStatus" id="audioStatus">
 			<div class="audio-container">
 				<div class="audio_bg">
 					<img class="audio_bg_img" src="./img/audio_bg.png" alt="">
-					<img class="icon" audio="playbackStatus" src="./img/play.png" alt="">
+					<img class="icon" audio="playbackStatus" id="playbackStatus" src="./img/play.png" alt="">
+					<div class="audio_pointer">
+						<img src="./img/audio_pointer.png" alt="">
+					</div>
 				</div>
 			</div>
 
-			<div class="audio_pointer">
+			<!-- <div class="audio_pointer">
 				<img src="./img/audio_pointer.png" alt="">
+			</div> -->
+		</div>
+		<div class="content">
+			<div class="Collapse">
+				<div class="Collapse-title" id="dropdownMenu1" data-toggle="Collapse">
+					<svg class="glyphicon-chevron-down" viewBox="0 0 1024 1024">
+						<path d="M381.29 838.92L710.25 526.5c8.3-7.89 8.3-21.12 0-29L381.29 185.08c-12.74-12.1-33.77-3.07-33.77 14.5v624.85c0 17.56 21.03 26.59 33.77 14.49z" p-id="4359"></path>
+					</svg>
+					<p>多语种ASR语音数据集</p>
+				</div>
+				<ul audio="text" class="Collapse-item" for="dropdownMenu1">
+					<li class="active" audioSrc='./audio/多语种ASR语音数据集/冰岛高保真长语音.wav'>冰岛高保真长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/波兰高保真长语音.wav'>波兰高保真长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/丹麦高保真长语音.wav'>丹麦高保真长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/德语长语音.wav'>德语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/芬兰语高保真长语音.wav'>芬兰语高保真长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/格鲁吉亚语长语音.wav'>格鲁吉亚语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/捷克语情感朗读长语音.wav'>捷克语情感朗读长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/捷克语长语音.wav'>捷克语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/罗马尼亚语情感朗读长语音.wav'>罗马尼亚语情感朗读长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/马来西亚语长语音.wav'>马来西亚语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/孟加拉语长语音.wav'>孟加拉语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/缅甸语长语音.wav'>缅甸语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/尼泊尔语长语音.wav'>尼泊尔语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/挪威高保真长语音.wav'>挪威高保真长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/葡语长语音.wav'>葡语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/瑞典高保真长语音.wav'>瑞典高保真长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/斯瓦希里语情感朗读长语音.wav'>斯瓦希里语情感朗读长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/泰语长语音.wav'>泰语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/土耳其语长语音.wav'>土耳其语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/西语长语音.wav'>西语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/西语自由对话语音.wav'>西语自由对话语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/希伯来语长语音.wav'>希伯来语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/匈牙利语长语音.wav'>匈牙利语长语音</li>
+					<li audioSrc='./audio/多语种ASR语音数据集/意大利语长语音.wav'>意大利语长语音</li>
+				</ul>
+			</div>
+			<div class="Collapse">
+				<div class="Collapse-title" id="dropdownMenu2" data-toggle="Collapse">
+					<svg class="glyphicon-chevron-down" viewBox="0 0 1024 1024">
+						<path d="M381.29 838.92L710.25 526.5c8.3-7.89 8.3-21.12 0-29L381.29 185.08c-12.74-12.1-33.77-3.07-33.77 14.5v624.85c0 17.56 21.03 26.59 33.77 14.49z" p-id="4359"></path>
+					</svg>
+					<p>多语种唤醒词语音数据集</p>
+				</div>
+				<ul audio="text" class="Collapse-item" for="dropdownMenu2">
+					<li audioSrc='./audio/多语种唤醒词语音数据集/阿拉伯口音英语唤醒词.wav'>阿拉伯口音英语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/阿拉伯语唤醒词.wav'>阿拉伯语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/德语唤醒词.wav'>德语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/俄语唤醒词.wav'>俄语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/法语唤醒词.wav'>法语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/韩语唤醒词.wav'>韩语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/美式英语唤醒词.wav'>美式英语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/葡语唤醒词.wav'>葡语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/日语唤醒词.wav'>日语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/泰语唤醒词.wav'>泰语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/西语唤醒词.wav'>西语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/印度口音英语唤醒词.wav'>印度口音英语唤醒词</li>
+					<li audioSrc='./audio/多语种唤醒词语音数据集/英式英语唤醒词.wav'>英式英语唤醒词</li>
+				</ul>
+			</div>
+			<div class="Collapse">
+				<div class="Collapse-title" id="dropdownMenu3" data-toggle="Collapse">
+					<svg class="glyphicon-chevron-down" viewBox="0 0 1024 1024">
+						<path d="M381.29 838.92L710.25 526.5c8.3-7.89 8.3-21.12 0-29L381.29 185.08c-12.74-12.1-33.77-3.07-33.77 14.5v624.85c0 17.56 21.03 26.59 33.77 14.49z" p-id="4359"></path>
+					</svg>
+					<p>方言ASR语音数据集</p>
+				</div>
+				<ul audio="text" class="Collapse-item" for="dropdownMenu3">
+					<li audioSrc='./audio/方言ASR语音数据集/川式普通话长语音流.wav'>川式普通话长语音流</li>
+					<li audioSrc='./audio/方言ASR语音数据集/口音粤语长语音流.wav'>口音粤语长语音流</li>
+					<li audioSrc='./audio/方言ASR语音数据集/蒙语长语音流.wav'>蒙语长语音流</li>
+					<li audioSrc='./audio/方言ASR语音数据集/青岛话长语音流.wav'>青岛话长语音流</li>
+					<li audioSrc='./audio/方言ASR语音数据集/苏州话长语音流.wav'>苏州话长语音流</li>
+					<li audioSrc='./audio/方言ASR语音数据集/天津话长语音流.wav'>天津话长语音流</li>
+					<li audioSrc='./audio/方言ASR语音数据集/长沙话自由对话语音流.wav'>长沙话自由对话语音流</li>
+				</ul>
 			</div>
 		</div>
-		<div class="audio-switch">
+
+		<!-- <div class="audio-switch">
 			<p>多语种ASR语音数据集</p>
 			<ul audio="text" class="list">
 				<li class="active" audioSrc='./audio/1/德语长语音流.wav'>德语长语音流</li>
@@ -182,10 +319,10 @@
 				<li audioSrc='./audio/1/西班牙语长语音流.wav'>西班牙语长语音流</li>
 				<li audioSrc='./audio/1/西班牙语自由对话.wav'>西班牙语自由对话</li>
 			</ul>
-		</div>
+		</div> -->
 
 	</div>
-	<audio audio="audio" src="./audio/2/川式普通话长语音流.wav"></audio>
+	<!-- <audio audio="audio" src="./audio/2/川式普通话长语音流.wav"></audio>
 	<div class="root" audio="root">
 		<div class="audio-style" audio="audioStatus">
 			<div class="audio-container">
@@ -238,99 +375,216 @@
 			</ul>
 		</div>
 
-	</div>
+	</div> -->
 
 	<script>
 		/**
 		 * 1 播放中
 		 * 2 暂停中
-		*/
-		let status = []
+		 */
+		let status = 1   // 1播放中  2暂停
 		// let flag = 0 //判断是哪个模块
-		const audio = [...document.querySelectorAll("audio[audio=audio]")] //音频
-		const audioarr = [...document.querySelectorAll("div[audio=root]")]
+		// const audio = [...document.querySelectorAll("audio[audio=audio]")] //音频
+		const audio = document.getElementById('audio')
+		// const audioarr = [...document.querySelectorAll("div[audio=root]")]
 		const textArr = [...document.querySelectorAll("ul[audio=text]")] // 音频列表
-		const audioStatus = [...document.querySelectorAll("div[audio=audioStatus]")]
-		const playbackStatus = [...document.querySelectorAll("img[audio=playbackStatus]")]
-		audioarr.forEach((item, index) => {
-			status.push(2)
-		})
+		// const audioStatus = [...document.querySelectorAll("div[audio=audioStatus]")]
+		const audioStatus = document.getElementById('audioStatus')
+		// const playbackStatus = [...document.querySelectorAll("img[audio=playbackStatus]")]
+		const playbackStatus = document.getElementById('playbackStatus')
 
-		audioarr.forEach((ditem, index) => {
-			// 监听音频是否播放完成
-			audio[index].addEventListener('ended', function () {
-				audio[index].pause();
-				status[index] = 2
-				audioStatus[index].classList.remove("play");
-				playbackStatus[index].setAttribute('src', './img/play.png')
+		console.log(audio);
+
+
+
+		// 监听音频是否播放完成
+		audio.addEventListener('ended', function () {
+				audio.pause();
+				status = 2
+				audioStatus.classList.remove("play");
+				playbackStatus.setAttribute('src', './img/play.png')
 			})
 			// 暂停 or 播放
-			playbackStatus[index].onclick = function () {
-				if (status[index] == 1) { // 如果是播放中
-					audio[index].pause();
+			playbackStatus.onclick = function () {
+				if (status == 1) { // 如果是播放中
+					audio.pause();
 					// 清除动画
-					status[index] = 2
-					playbackStatus[index].setAttribute('src', './img/play.png')
-					audioStatus[index].classList.remove("play");
+					status = 2
+					playbackStatus.setAttribute('src', './img/play.png')
+					audioStatus.classList.remove("play");
 				} else { // 暂停中
-					removePlaystatus(index)
-					audio[index].play();
-					status[index] = 1
-					audioStatus[index].classList.add("play");
-					playbackStatus[index].setAttribute('src', './img/suspend.png')
+					removePlaystatus()
+					audio.play();
+					status = 1
+					audioStatus.classList.add("play");
+					playbackStatus.setAttribute('src', './img/suspend.png')
 				}
 			}
-			let textArrChildren = [...textArr[index].children]
+			console.log(textArr);
+			let textArrChildren = []
+			textArr.forEach(item => {
+				textArrChildren.push(...item.children)
+			})
+			console.log(textArrChildren);
+			// let textArrChildren = [...textArr[index].children]
 			textArrChildren.forEach(item => {
 				item.onclick = function () {
 					// flag = index   //保存当前在播放模块
 					var audioLoad = new Audio(item.getAttribute("audioSrc"));
-					audio[index].pause();
+					audio.pause();
 					/**
 					 * 删除其他active类名
 					 * 
-					*/
-					textArrChildren.forEach(t => {
-						t.classList.remove("active");
-					})
+					 */
+					//  $("#tabs ul li").removeClass("ed");
+					$(textArrChildren).removeClass('active');
+					console.log(this);
+      		$(this).addClass("active");
+					// textArrChildren.forEach(t => {
+					// 	t.classList.remove("active");
+					// })
 					// 清除动画
-					removePlaystatus(index)
+					removePlaystatus()
 					// 添加选中类名
-					item.classList.add("active");
+					// item.classList.add("active");
 
 					// 音频加载完成后执行播放
 					// audioLoad.onloadedmetadata = function(){
-					audio[index].setAttribute('src', item.getAttribute("audioSrc"))
-					audio[index].play();
-					status[index] = 1
-					audioStatus[index].classList.add("play");
-					playbackStatus[index].setAttribute('src', './img/suspend.png')
+					audio.setAttribute('src', item.getAttribute("audioSrc"))
+					audio.play();
+					status = 1
+					audioStatus.classList.add("play");
+					playbackStatus.setAttribute('src', './img/suspend.png')
 					// }
 
 				}
 			})
-		})
+
+
+
+
+
+		// audioarr.forEach((item, index) => {
+		// 	status.push(2)
+		// })
+
+		// audioarr.forEach((ditem, index) => {
+		// 	// 监听音频是否播放完成
+		// 	audio[index].addEventListener('ended', function () {
+		// 		audio[index].pause();
+		// 		status[index] = 2
+		// 		audioStatus[index].classList.remove("play");
+		// 		playbackStatus[index].setAttribute('src', './img/play.png')
+		// 	})
+		// 	// 暂停 or 播放
+		// 	playbackStatus[index].onclick = function () {
+		// 		if (status[index] == 1) { // 如果是播放中
+		// 			audio[index].pause();
+		// 			// 清除动画
+		// 			status[index] = 2
+		// 			playbackStatus[index].setAttribute('src', './img/play.png')
+		// 			audioStatus[index].classList.remove("play");
+		// 		} else { // 暂停中
+		// 			removePlaystatus(index)
+		// 			audio[index].play();
+		// 			status[index] = 1
+		// 			audioStatus[index].classList.add("play");
+		// 			playbackStatus[index].setAttribute('src', './img/suspend.png')
+		// 		}
+		// 	}
+		// 	let textArrChildren = [...textArr[index].children]
+		// 	textArrChildren.forEach(item => {
+		// 		item.onclick = function () {
+		// 			// flag = index   //保存当前在播放模块
+		// 			var audioLoad = new Audio(item.getAttribute("audioSrc"));
+		// 			audio[index].pause();
+		// 			/**
+		// 			 * 删除其他active类名
+		// 			 * 
+		// 			 */
+		// 			textArrChildren.forEach(t => {
+		// 				t.classList.remove("active");
+		// 			})
+		// 			// 清除动画
+		// 			removePlaystatus(index)
+		// 			// 添加选中类名
+		// 			item.classList.add("active");
+
+		// 			// 音频加载完成后执行播放
+		// 			// audioLoad.onloadedmetadata = function(){
+		// 			audio[index].setAttribute('src', item.getAttribute("audioSrc"))
+		// 			audio[index].play();
+		// 			status[index] = 1
+		// 			audioStatus[index].classList.add("play");
+		// 			playbackStatus[index].setAttribute('src', './img/suspend.png')
+		// 			// }
+
+		// 		}
+		// 	})
+		// })
 		// 移除动画
 		const removePlaystatus = function (index) {
-			playbackStatus.forEach((t, i) => {
-				if (index != i) {
-					status[i] = 2
-					t.setAttribute('src', './img/play.png')
-				}
-			})
-			audioStatus.forEach((t, i) => {
-				if (index != i) {
-					// 删除动画
-					t.classList.remove("play");
-				}
-			})
-			// 停止其他音频
-			audio.forEach((t, i) => {
-				if (index != i) {
-					t.pause();
-				}
-			})
+			status = 2
+			playbackStatus.setAttribute('src', './img/play.png')
+			audioStatus.classList.remove("play");
+			audio.pause();
+			// playbackStatus.forEach((t, i) => {
+			// 	if (index != i) {
+			// 		status[i] = 2
+			// 		t.setAttribute('src', './img/play.png')
+			// 	}
+			// })
+			// audioStatus.forEach((t, i) => {
+			// 	if (index != i) {
+			// 		// 删除动画
+			// 		t.classList.remove("play");
+			// 	}
+			// })
+			// // 停止其他音频
+			// audio.forEach((t, i) => {
+			// 	if (index != i) {
+			// 		t.pause();
+			// 	}
+			// })
 		}
+
+
+		// 下拉
+		$(document).ready(function ($) {
+			let toggle = '[data-toggle="Collapse"]'
+			let arr = []
+			let iconArr = []
+			$(toggle).each(function (index) {
+				let forid=  `[for="${this.id}"]`;
+				arr.push($(forid))
+				iconArr.push($(this).children('svg'))
+				$(this).click(function () {
+					let t = `[for="${this.id}"]`
+					if ($(t).length === 0) {
+						throw `for未绑定对应id值`;
+					}
+					let domc = $(t)
+					let icon = $(this).children('svg')
+					$(arr).each(function(index){
+						this.css("max-height", "0px")
+						$($(toggle)[index]).css({'background':'#F8F8F8','color':'#000'})
+						iconArr[index].css({'transform': 'rotate(0deg)','fill': '#000'})
+					})
+					let h = domc.children().length * domc.children().outerHeight(true)
+					if (domc.css('max-height') === '0px') {
+						$(this).css({'background':'#8361bb','color':'#fff'})
+						// $(this).css('color','#fff')
+						domc.css("max-height", h + 'px')
+						icon.css({'transform': 'rotate(90deg)','fill': '#fff'})
+						// icon.css('fill', '#fff')
+					} else {
+						$(this).css({'background':'#F8F8F8','color':'#000'})
+						domc.css("max-height", "0px")
+						icon.css({'transform': 'rotate(0deg)','fill': '#000'})
+					}
+				});
+			})
+		})
 	</script>
 </body>
 
