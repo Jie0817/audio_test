@@ -49,7 +49,7 @@
 			justify-content: space-between;
 			margin: auto;
 			margin-bottom: 0.6rem;
-			margin-top: 1rem;
+			/* margin-top: 1rem; */
 		}
 
 		.audio-style {
@@ -211,7 +211,7 @@
 </head>
 
 <body>
-	<audio audio="audio" id="audio" src="./audio/1/德语长语音流.wav"></audio>
+	<audio audio="audio" id="audio" src="./audio/多语种ASR语音数据集/冰岛高保真长语音.wav"></audio>
 	<div class="root" audio="root">
 		<div class="audio-style" audio="audioStatus" id="audioStatus">
 			<div class="audio-container">
@@ -573,10 +573,8 @@
 					let h = domc.children().length * domc.children().outerHeight(true)
 					if (domc.css('max-height') === '0px') {
 						$(this).css({'background':'#8361bb','color':'#fff'})
-						// $(this).css('color','#fff')
 						domc.css("max-height", h + 'px')
 						icon.css({'transform': 'rotate(90deg)','fill': '#fff'})
-						// icon.css('fill', '#fff')
 					} else {
 						$(this).css({'background':'#F8F8F8','color':'#000'})
 						domc.css("max-height", "0px")
